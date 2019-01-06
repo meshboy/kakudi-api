@@ -1,0 +1,52 @@
+{
+  "name": "kakudi-api",
+  "version": "1.0.0",
+  "description": "Kakudi | Track how money flows in and flows out",
+  "author": "Meshileya Seun <meshileyaseun@gmail.com/>",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack --color --progress",
+    "test:unit": "NODE_ENV=testing rm -rf ./tmp/mocha-webpack && mocha-webpack --webpack-config webpack.testing.js --mode development \"src/**/*.test.js\" --timeout 10000 --require source-map-support/register",
+    "test": "npm run test:unit"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "express-jwt": "^5.3.0",
+    "joi": "^13.2.0",
+    "jsonwebtoken": "^8.1.0",
+    "mongoose": "^4.12.1",
+    "apollo-server-express": "^2.2.2",
+    "bcrypt-nodejs": "0.0.3",
+    "cloudinary": "^1.13.2",
+    "dotenv": "^6.1.0",
+    "graphql": "^14.0.2",
+    "lodash.merge": "^4.6.1",
+    "stream-to": "^2.0.0",
+    "stream-to-buffer": "^0.1.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-regenerator": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "chai": "^4.1.2",
+    "chai-http": "^4.2.1",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-config-airbnb-base": "^11.3.2",
+    "eslint-plugin-import": "^2.6.0",
+    "eslint-plugin-jsx-a11y": "^5.1.0",
+    "eslint-plugin-react": "^7.3.0",
+    "mocha": "^4.0.1",
+    "mocha-webpack": "next",
+    "raw-loader": "^0.5.1",
+    "source-map-support": "^0.5.0",
+    "start-server-webpack-plugin": "^2.2.0",
+    "webpack": "^3.6.0",
+    "webpack-cli": "^3.1.2",
+    "webpack-node-externals": "^1.6.0"
+  }
+}
