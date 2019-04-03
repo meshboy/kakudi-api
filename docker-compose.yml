@@ -1,0 +1,22 @@
+version: '3'
+services:
+  kakudi-server:
+    container_name: kakudi-container
+    restart: always
+    build: . 
+    image: kakudi-server:1.0
+    environment: 
+        WAIT_HOSTS: mongo:27017
+    ports: 
+      - 3000:${PORT}
+    depends_on:
+      - mongo
+  
+  # this is only used locally
+  mongo:
+    container_name: mongo-container
+    image: mongo
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - 27017:27017

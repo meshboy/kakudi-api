@@ -1,21 +1,23 @@
 FROM node:8
 
-# Create app directory
-WORKDIR /usr/src/app
+# create and set work directory
+RUN mkdir -p /src/kakudi
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
+WORKDIR /src/kakudi
 
+COPY package*.json /src/kakudi/
+# install all dependencies
 RUN npm install
-# If you are building your code for production
-# RUN npm install --only=production
 
-RUN npm audit fix --force
+COPY src /src/kakudi/src
+COPY README.md .env .babelrc /src/kakudi/
 
-# Bundle app source
-COPY . .
+RUN npm run build
 
 EXPOSE 8080
-CMD [ "npm", "start" ]
+
+## mongo is damm slow, lets wait
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.2.1/wait /wait
+RUN chmod +x /wait
+
+CMD /wait && npm start

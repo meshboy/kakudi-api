@@ -8,12 +8,12 @@ const userSchema = new mongoose.Schema({
         required: [true, 'User must have a unique email address']
     },
 
-    name: {
+    username: {
         type: String,
         required: [true, 'Name is required']
     },
 
-    password: {
+    passwordHash: {
         type: String,
         required: [true, 'Password is required']
     }
@@ -27,7 +27,7 @@ userSchema.methods.generateHashPassword = function (password) {
 };
 
 userSchema.methods.comparePassword = function (password) {
-    return bcrypt.compareSync(password, this.password);
+    return bcrypt.compareSync(password, this.passwordHash);
 }
 
 export const User = mongoose.model('User', userSchema);

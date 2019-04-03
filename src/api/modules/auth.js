@@ -57,12 +57,10 @@ export const loginUser = (req, res, next) => {
               .json({ status: false, message: "Password is incorrect" });
           }
         } else {
-          res
-            .status(404)
-            .json({
-              status: false,
-              message: "User does not exist! Kindly register"
-            });
+          res.status(404).json({
+            status: false,
+            message: "User does not exist! Kindly register"
+          });
         }
       })
       .catch(error => next(error));
@@ -98,14 +96,18 @@ export const getUser = () => (req, res, next) => {
 export const createUser = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
+  const username = req.body.username;
+
+  console.log(req.body);
 
   // validate the data coming from the client before processing
   const schema = Joi.object().keys({
     email: Joi.string().email(),
-    password: Joi.string().required()
+    password: Joi.string().required(),
+    username: Joi.string().required()
   });
 
-  const result = Joi.validate({ email, password }, schema);
+  const result = Joi.validate({ email, password, username }, schema);
 
   if (result.error) {
     res.status(400).json({ status: false, message: result.error });
@@ -119,15 +121,17 @@ export const createUser = (req, res, next) => {
         } else {
           const newUser = new User();
           newUser.email = email;
+          newUser.username = username;
           newUser.passwordHash = newUser.generateHashPassword(password);
 
           newUser
             .save()
             .then(doc => {
               req.user = doc;
-              res
-                .status(200)
-                .json({ status: true, data: { token: signIn(req.user._id) } });
+              res.status(201).json({
+                status: true,
+                data: { token: signIn(doc._id), email, username, id: doc._id }
+              });
             })
             .catch(error => next(error));
         }
