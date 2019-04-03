@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../src/api/index.js"],"names":["router"],"mappings":";;;;;;AAGA;;kBAEeA,c,EALf","file":"index.js","sourcesContent":["/**\n *created by Meshileya Seun <meshileyaseun@gmail.com/> 4/12/18\n **/\nimport { router } from './router';\n\nexport default router;\n"]}
